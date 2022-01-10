@@ -21,7 +21,7 @@ but include recent package and security update for ghostbin/spectre
 - load-grunt-tasks     : 3.5.2 -> 5.1.0
 
 
-## author
+## author readme:
 
 This is a repository I've created in order to have a Docker image for running [Ghostbin](https://ghostbin.com) in a private server.
 
@@ -61,7 +61,7 @@ In order to run the image, you need to know three things:
 So, a way to run this container exposing all 3 things would be:
 
 ```
-docker run -it -d --name="ghostbin" -p 8619:8619 -v /var/log/ghostbin:/logs -v /var/data/ghostbin:/data dexafree/ghostbin
+docker run -it -d --name="ghostbin" -p 8619:8619 -v /var/log/ghostbin:/logs -v /var/data/ghostbin:/data borrougagnou/ghostbin-updated
 ```
 
 It would expose the 8619 port of the host machine, mount the `logs` volume at the local path `/var/log/ghostbin` and mount the `data` volume at the local path `/var/data/ghostbin`. You can adapt it to any use you need.
