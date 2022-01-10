@@ -3,24 +3,25 @@
 This is a fork of dexafree/ghostbin Dockerfile
 but include recent package and security update for ghostbin/spectre
 
-- Dockerfile
-golang : 1.8.3 -> 1.17.6
-alpine : 3.06  -> 3.15
+### Dockerfile
+- golang : 1.8.3 -> 1.17.6
+- alpine : 3.06  -> 3.15
 
-- ghostbin/spectre
-grunt     : 1.0.1 -> 1.4.1
-grunt-cli : 1.2.0 -> 1.4.3
-grunt-contrib-clean  : 1.1.0 -> 2.0.0
-grunt-contrib-concat : 1.0.1 -> 2.0.0
-grunt-contrib-copy   : 1.0.0 -> 1.0.0
-grunt-contrib-cssmin : 2.2.1 -> 4.0.0
-grunt-contrib-less   : 1.4.1 -> 3.0.0
-grunt-contrib-uglify : 3.1.0 -> 5.0.1
-grunt-filerev        : 2.3.1 -> 2.3.1
-grunt-usemin         : 3.1.1 -> REMOVED unmaintained + critical security
-load-grunt-tasks     : 3.5.2 -> 5.1.0
+### ghostbin/spectre
+- grunt     : 1.0.1 -> 1.4.1
+- grunt-cli : 1.2.0 -> 1.4.3
+- grunt-contrib-clean  : 1.1.0 -> 2.0.0
+- grunt-contrib-concat : 1.0.1 -> 2.0.0
+- grunt-contrib-copy   : 1.0.0 -> 1.0.0
+- grunt-contrib-cssmin : 2.2.1 -> 4.0.0
+- grunt-contrib-less   : 1.4.1 -> 3.0.0
+- grunt-contrib-uglify : 3.1.0 -> 5.0.1
+- grunt-filerev        : 2.3.1 -> 2.3.1
+- grunt-usemin         : 3.1.1 -> REMOVED unmaintained + critical security
+- load-grunt-tasks     : 3.5.2 -> 5.1.0
 
 
+## author
 
 This is a repository I've created in order to have a Docker image for running [Ghostbin](https://ghostbin.com) in a private server.
 
