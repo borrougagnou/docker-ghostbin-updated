@@ -1,4 +1,4 @@
-FROM golang:1.17.7-alpine3.15
+FROM golang:1.21-alpine3.18
 
 RUN apk add --update \
     git \
@@ -10,9 +10,9 @@ RUN apk add --update \
 USER ghostbin
 ENV GOPATH=/ghostbin/go
 RUN mkdir -p /ghostbin/go/src/github.com/borrougagnou \
-    && git clone https://github.com/borrougagnou/spectre-updated.git /ghostbin/go/src/github.com/borrougagnou/ghostbin \
+    && git clone -b stable https://github.com/borrougagnou/spectre-updated.git /ghostbin/go/src/github.com/borrougagnou/ghostbin \
     && cd /ghostbin/go/src/github.com/borrougagnou/ghostbin \
-    && sed -i -e 's:./bin/pygments/pygmentize:/usr/bin/pygmentize:g' languages.yml \
+    && sed -i -e 's:pygmentize:/usr/bin/pygmentize:g' languages.yml \
     && echo "Go get" \
     && go get \
     && echo "Go install" \
