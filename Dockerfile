@@ -1,4 +1,4 @@
-FROM golang:1.21-alpine3.18
+FROM golang:1.24-alpine3.21
 
 RUN apk add --update \
     git \
@@ -6,12 +6,12 @@ RUN apk add --update \
     sudo \
     nodejs npm && npm install npm@latest -g \
     && rm -rf /var/cache/apk/* \
-    && adduser -h /ghostbin -u 10000 -D -g "" ghostbin
-USER ghostbin
-ENV GOPATH=/ghostbin/go
-RUN mkdir -p /ghostbin/go/src/github.com/borrougagnou \
-    && git clone -b stable https://github.com/borrougagnou/spectre-updated.git /ghostbin/go/src/github.com/borrougagnou/ghostbin \
-    && cd /ghostbin/go/src/github.com/borrougagnou/ghostbin \
+    && adduser -h /spectre -u 10000 -D -g "" spectre
+USER spectre
+ENV GOPATH=/spectre/go
+RUN mkdir -p /spectre/go/src/github.com/borrougagnou \
+    && git clone -b stable https://github.com/borrougagnou/spectre-updated.git /spectre/go/src/github.com/borrougagnou/spectre-updated \
+    && cd /spectre/go/src/github.com/borrougagnou/spectre-updated \
     && sed -i -e 's:pygmentize:/usr/bin/pygmentize:g' languages.yml \
     && echo "Go get" \
     && go get \
@@ -20,20 +20,20 @@ RUN mkdir -p /ghostbin/go/src/github.com/borrougagnou \
     && echo "Go build" \
     && go build \
     && npm install
-WORKDIR /ghostbin/go/src/github.com/borrougagnou/ghostbin
+WORKDIR /spectre/go/src/github.com/borrougagnou/spectre-updated
 USER root
 RUN mkdir /logs \
-    && chown -R ghostbin:ghostbin /logs \
+    && chown -R spectre:spectre /logs \
     && mkdir /data \
-    && chown -R ghostbin:ghostbin /data
+    && chown -R spectre:spectre /data
 
 EXPOSE 8619
 
 VOLUME /logs
 VOLUME /data
 
-COPY ghostbin.sh /ghostbin/ghostbin.sh
+COPY spectre.sh /spectre/spectre.sh
 # Ensure it's executable
-RUN chmod +x /ghostbin/ghostbin.sh
-ENTRYPOINT /ghostbin/ghostbin.sh
+RUN chmod +x /spectre/spectre.sh
+ENTRYPOINT [ "/spectre/spectre.sh" ]
 # CMD -addr="0.0.0.0:8619" -log_dir="/logs" -root="/data"

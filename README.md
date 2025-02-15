@@ -1,20 +1,40 @@
-# Updated Ghostbin Dockerfile
+# Updated Spectre Dockerfile
 
 This is a fork of dexafree/ghostbin Dockerfile
-but include recent package and security update for ghostbin/spectre
+but include recent package and security update for spectre (formely known as ghostbin)
+
+## New Usage
+
+If you provisionned with "ghostbin" before you need to:
+- rename every "ghostbin" folder by "spectre-updated" from now on, it mean if you data folder is "/var/data/ghostbin" you should rename it: "/var/data/spectre-updated"
 
 
-### changelog (YYYYMMDD)
+Run this command to launch spectre on the port 8619
+```
+docker run -it -d --name="spectre-updated" -p 8619:8619 -v /var/log/spectre-updated:/logs -v /var/data/spectre updated:/data borrougagnou/spectre-updated
+```
+
+---
+### Changelog (YYYYMMDD)
+##### 20250221
+- Begin to rename all "ghostbin" by "spectre"
+- Dockerfile :
+  - golang : 1.21.0 -> 1.24.0
+  - alpine : 3.18  -> 3.21
+  - [Fixed the entrypoint for docker](https://docs.docker.com/reference/build-checks/json-args-recommended/)
+- Spectre (formely known as Ghostbin):
+  - use the latest version of the spectre-updated repository
+
 ##### 20231129
 - Dockerfile :
-  - golang : 1.17.6 -> 1.21.0
-  - alpine : 3.15  -> 3.18
+  - golang : 1.17.7 -> 1.21.0
+  - alpine : 3.15 -> 3.18
 - Ghostbin/spectre :
   - use the latest version
 
 ##### 20220211
 - Dockerfile :
-  - golang : 1.8.3 -> 1.17.6
+  - golang : 1.8.3 -> 1.17.7
   - alpine : 3.06  -> 3.15
 
 ---
@@ -43,7 +63,7 @@ So, you will need to run it on a host using Docker for Linux in order for them t
 
 ## Notes
 
-As the [master branch of the Ghostbin project](https://github.com/DHowett/spectre/commit/90de2d7c989a603cf494eae3d31ec88420ebe750) (link to the latest master commit at the time of writing this readme) is not stable right now (it has mixed namespaces and is in the middle of a refactor), this Dockerfile uses the latest commit in the `v1-stable` branch, so it will probably not be running the exact same Ghostbin version the production server is running.
+As the [master branch of the Ghostbin/Spectre project](https://github.com/DHowett/spectre/commit/90de2d7c989a603cf494eae3d31ec88420ebe750) (link to the latest master commit at the time of writing this readme) is not stable right now (it has mixed namespaces and is in the middle of a refactor), this Dockerfile uses the latest commit in the `v1-stable` branch, so it will probably not be running the exact same Ghostbin version the production server is running.
 
 I spoke to the author and he told me he is working in making it stable, so in the future this image should adapt to the latest version.
 
@@ -51,14 +71,15 @@ I spoke to the author and he told me he is working in making it stable, so in th
 
 In order to run the image, you need to know three things:
 
-1. Ports: This image exposes the 8619 port for serving the Ghostbin site.
-2. Logs volume: This image exposes a `logs` volume, so you are able to read the logs that Ghostbin outputs. The path inside the container will be `/logs`
+1. Ports: This image exposes the 8619 port for serving the Spectre site.
+2. Logs volume: This image exposes a `logs` volume, so you are able to read the logs that Spectre outputs. The path inside the container will be `/logs`
 3. Data volume: This image exposes a `data` volume, so you are able to access and persist things like pastes, session keys and accounts through containers (and survive restarts).
 
 So, a way to run this container exposing all 3 things would be:
 
 ```
-docker run -it -d --name="ghostbin" -p 8619:8619 -v /var/log/ghostbin:/logs -v /var/data/ghostbin:/data borrougagnou/ghostbin-updated
+docker run -it -d --name="spectre-updated" -p 8619:8619 -v /var/log/spectre-updated:/logs -v /var/data/spectre updated:/data borrougagnou/spectre-updated
 ```
 
-It would expose the 8619 port of the host machine, mount the `logs` volume at the local path `/var/log/ghostbin` and mount the `data` volume at the local path `/var/data/ghostbin`. You can adapt it to any use you need.
+It would expose the 8619 port of the host machine, mount the `logs` volume at the local path `/var/log/spectre-updated` and mount the `data` volume at the local path `/var/data/spectre-updated`. You can adapt it to any use you need.
+
