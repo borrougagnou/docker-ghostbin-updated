@@ -10,7 +10,7 @@ RUN apk add --update \
 USER spectre
 ENV GOPATH=/spectre/go
 RUN mkdir -p /spectre/go/src/github.com/borrougagnou \
-    && git clone -b stable https://github.com/borrougagnou/spectre-updated.git /spectre/go/src/github.com/borrougagnou/spectre-updated \
+    && git clone -b dev https://github.com/borrougagnou/spectre-updated.git /spectre/go/src/github.com/borrougagnou/spectre-updated \
     && cd /spectre/go/src/github.com/borrougagnou/spectre-updated \
     && sed -i -e 's:pygmentize:/usr/bin/pygmentize:g' languages.yml \
     && echo "Go get" \
